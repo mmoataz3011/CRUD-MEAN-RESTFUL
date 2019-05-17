@@ -1,0 +1,131 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<div class="container" style="margin-top: 10%">
+      <div class="panel panel-primary">
+        <div class="panel-heading">user Register
+         <i class="fas fa-plus-circle pull-right" (click)="display('form1')" ></i>
+        </div>
+        <div class="panel-body">
+            <form #userRegister ="ngForm" id="form1" (ngSubmit)="onSubmit(userRegister,valid)">
+              <div>
+                  <label>User Name</label>
+              <input type="text" style="margin-block-end: 10px;margin-left: 100px" id="name" name="name"
+                required minlength="6"
+                [(ngModel)]="user.name"
+                #name="ngModel"
+                >
+                <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+
+                    <div *ngIf="name.errors?.required">
+                     Name is required.
+                    </div>
+                    <div *ngIf="name.errors?.minlength">
+                    Min length should be 6
+                   </div>
+                   </div>
+              </div>
+
+              <div>
+                  <label>User Email</label>
+                  <input type="text" style="margin-block-end: 10px;margin-left: 100px" id="email" name="email"
+                  required
+                  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+                  [(ngModel)]="user.email"
+                  #email="ngModel"
+                  >
+                  <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="alert alert-danger">
+
+                      <div *ngIf="email.errors?.required">
+                       Email is required.
+                      </div>
+                      <div *ngIf="email.errors?.pattern">
+                      Enter a valid email
+                     </div>
+                     </div>
+                </div>
+
+                <div>
+                    <label>Password</label>
+                    <input type="password" style="margin-block-end: 10px;margin-left: 127px" id="password" name="password"
+                    required minlength="6"
+                    [(ngModel)]="user.password"
+                    #password="ngModel"
+                    >
+                    <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="alert alert-danger">
+
+                        <div *ngIf="password.errors?.required">
+                         Password is required.
+                        </div>
+                        <div *ngIf="password.errors?.minlength">
+                        Min length should be 6
+                       </div>
+                       </div>
+                  </div>
+                  <div>
+                      <label>Phone</label>
+                      <input type="text" style="margin-block-end: 10px;margin-left: 150px" id="phone" name="phone"
+                      required minlength="10"
+                      [(ngModel)]="user.phone"
+                      #phone="ngModel"
+                      >
+                      <div *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)" class="alert alert-danger">
+
+                          <div *ngIf="phone.errors?.required">
+                           Phone is required.
+                          </div>
+                          <div *ngIf="phone.errors?.minlength">
+                          Min length should be 10
+                         </div>
+                         </div>
+                    </div>
+
+                    
+                    <div>
+                      <button type="submit" style="margin-left: 200px;margin-top: 10px">Save</button>
+                      <button type="button" id="reset" (click)="userRegister.reset()"  style="margin-left: 10px;margin-top: 10px">New</button>
+
+                    </div>
+
+                  </form>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container" style="margin-top: 10%">
+      <div class="panel panel-primary">
+        <div class="panel-heading">user Details
+         <i class="fas fa-plus-circle pull-right" (click)="display('form2')" ></i>
+        </div>
+        <div class="panel-body" style="width: 100%">
+          <div id="form2">
+              <table class="table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Password</th>
+                      <th>Phone</th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let i of userData;let loo=index">
+                        <td >{{i.name}}</td>
+                        <td>{{i.email}}</td>
+                        <td>{{i.password}}</td>
+                        <td>{{i.phone}}</td>
+                        <td> <button type="button" (click)="Fill(loo)" class="alert-danger">Edit</button></td>
+                        <td> <button type="button" (click)="delete(loo)" class="alert-danger">Delete</button></td>
+
+                    </tr>
+                  </tbody>
+                </table>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
